@@ -4,6 +4,14 @@
 /// <reference types="@types/chai" />
 /// <reference types="@types/mocha" />
 
+declare module "meteor/alanning:roles" {
+  export module Roles {
+    const GLOBAL_GROUP;
+    function userIsInRole(id?: any, value?: any, value2?: any) {};
+    function addUsersToRoles(id?: any, value?: any, value2?: any) {};
+  }
+}
+
 declare module "*.html" {
   const template: string;
   export default template;

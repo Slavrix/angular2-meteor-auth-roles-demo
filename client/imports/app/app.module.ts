@@ -1,7 +1,6 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { AccountsModule } from "angular2-meteor-accounts-ui";
-import {MeteorComponent} from "angular2-meteor";
 import { AppComponent } from "./app.component";
 import { DemoComponent } from "./demo/demo.component";
 import { DemoDataService } from "./demo/demo-data.service";
@@ -29,8 +28,7 @@ import { DemoDataService } from "./demo/demo-data.service";
   // Main Component
   bootstrap: [ AppComponent ]
 })
-export class AppModule extends MeteorComponent {
+export class AppModule {
   constructor() {
-    super();
   }
 }
