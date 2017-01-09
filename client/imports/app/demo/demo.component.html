@@ -1,0 +1,9 @@
+<h2>{{greeting}} <span *ngIf="user">{{user.profile.name}}</span></h2>
+
+<div *ngIf="!user">Please log in</div>
+<div *ngIf="user">You are logged in</div>
+
+<div *ngIf="user">
+  <div *ngIf="checkRoles('admin')">Admin</div>
+  <div>Others</div>
+</div>
