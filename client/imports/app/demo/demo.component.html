@@ -43,7 +43,8 @@
           <label for="newRole">Role: </label>
           <!-- <input type="text" class="form-control" name="newRole" id="newRole" placeholder="Enter Users Role" [(ngModel)]="newUser.role" #newRole="ngModel" required> -->
           <select name="newRole" id="newRole" [(ngModel)]="newUser.role" class="custom-select" #newRole="ngModel" required>
-            <option *ngFor="let role of roles" [value]="role">{{role}}</option>
+            <option [ngValue]="''" disabled hidden>Set Role</option>
+            <option *ngFor="let role of roles" [ngValue]="role">{{role}}</option>
           </select>
         </div>
         <button type="submit" class="btn btn-primary" [disabled]="!newUserForm.form.valid">Create User</button>
