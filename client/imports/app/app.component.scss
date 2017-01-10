@@ -1,8 +1,10 @@
+@import "../../styles/colors";
+
 .app {
-  background: lightgrey;
+  background: $color5;
   padding: 20px;
 }
 
 h1 {
-  color: navy;
+  color: $color3;
 }
