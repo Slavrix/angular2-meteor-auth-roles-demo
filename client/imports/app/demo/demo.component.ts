@@ -23,6 +23,11 @@ export class DemoComponent extends MeteorComponent implements OnInit, OnDestroy 
   userList: any;
   // userListSub: Subscription;
   nameOfUser: string;
+  newUser: any = {
+    name: "",
+    email: "",
+    role: ""
+  };
 
   constructor(
     //  private demoDataService: DemoDataService
@@ -66,8 +71,17 @@ export class DemoComponent extends MeteorComponent implements OnInit, OnDestroy 
     });
   }
 
-  createUser() {
+  createUser(form) {
     // create a new user, only admin can do this
+    Meteor.call("createNewUser", this.newUser, () => {
+      form.reset();
+      this.newUser = {
+        name: "",
+        email: "",
+        role: ""
+      };
+      form.reset();
+    });
   }
 
   updateUser() {

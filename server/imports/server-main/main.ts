@@ -22,6 +22,10 @@ export class Main {
       }
     });
 
+    Meteor.methods({
+      createNewUser: this.createNewUser
+    });
+
     let roles = ["admin", "spectator", "coach", "player"];
     Roles.getAllRoles().map((data) => {
       roles.splice(roles.indexOf(data.name), 1);
@@ -50,5 +54,16 @@ export class Main {
     }
   }
 
+  createNewUser(newUser, callback): any {
+    let account = {
+      profile: {
+        name: newUser.name
+      },
+      password: "123456",
+      email: newUser.email,
+      roles: newUser.role
+    };
+    Accounts.createUser(account, callback);
+  }
 
 }
