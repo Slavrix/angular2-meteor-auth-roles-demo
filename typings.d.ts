@@ -9,6 +9,14 @@ declare module "meteor/alanning:roles" {
     const GLOBAL_GROUP;
     function userIsInRole(id?: any, value?: any, value2?: any) {};
     function addUsersToRoles(id?: any, value?: any, value2?: any) {};
+    function createRole(id?: any) {};
+    function deleteRole(id?: any) {};
+    function getAllRoles() {};
+    function getGroupsForUser(id?: any, value?: any) {};
+    function getRolesForUser(id?: any, value?: any) {};
+    function getUsersInRole (id?: any, value?: any, value2?: any){};
+    function removeUsersFromRoles (id?: any, value?: any, value2?: any){};
+    function setUsersRoles (id?: any, value?: any, value2?: any){};
   }
 }
 

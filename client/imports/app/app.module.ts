@@ -1,4 +1,5 @@
 import { NgModule } from "@angular/core";
+import { FormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { AccountsModule } from "angular2-meteor-accounts-ui";
 import { AppComponent } from "./app.component";
@@ -23,7 +24,8 @@ import { DemoDataService } from "./demo/demo-data.service";
   // Modules
   imports: [
     BrowserModule,
-    AccountsModule
+    AccountsModule,
+    FormsModule
   ],
   // Main Component
   bootstrap: [ AppComponent ]

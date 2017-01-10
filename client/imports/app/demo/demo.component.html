@@ -1,9 +1,28 @@
-<h2>{{greeting}} <span *ngIf="user">{{user.profile.name}}</span></h2>
+<h2>{{greeting}} <span *ngIf="user && user.profile">{{user.profile.name}}</span></h2>
 
 <div *ngIf="!user">Please log in</div>
 <div *ngIf="user">You are logged in</div>
 
 <div *ngIf="user">
-  <div *ngIf="checkRoles('admin')">Admin</div>
-  <div>Others</div>
+  <div>My Roles: {{getRoles()}}</div>
+  <div *ngIf="user.profile">Your name is {{user.profile.name}}</div>
+  
+  <div *ngIf="!user.profile">
+    <!--if no profile, allow user to save their name--> 
+    <form class="form-inline" (ngSubmit)="updateProfile()" #nameForm="ngForm">
+      <div class="form-group">
+        <label for="name">Name: </label>
+        <input type="text" class="form-control" name="name" id="name" placeholder="Enter Your Name" [(ngModel)]="nameOfUser" #name="ngModel" required>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="!nameForm.form.valid">Save</button>
+      <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+        Name is required
+      </div>
+    </form>
+  </div>
+    
+  <div *ngIf="checkRoles('admin')">
+    
+    <!--list all users with roles-->    
+  </div>
 </div>

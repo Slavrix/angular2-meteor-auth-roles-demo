@@ -19,6 +19,7 @@ export class DemoComponent extends MeteorComponent implements OnInit {
   greeting: string;
   // data: Observable<Demo[]>;
   user: Meteor.User;
+  nameOfUser: string;
 
   constructor(
     // private demoDataService: DemoDataService
@@ -31,5 +32,21 @@ export class DemoComponent extends MeteorComponent implements OnInit {
 
   checkRoles(role) {
     return Roles.userIsInRole(this.user, role);
+  }
+
+  getRoles() {
+    return Roles.getRolesForUser(this.user);
+  }
+
+  updateProfile() {
+    Meteor.users.update(Meteor.userId(), {
+      $set: {
+        "profile": {
+          "name": this.nameOfUser
+        }
+      }
+    }, (data) => {
+      console.log(data);
+    });
   }
 }
