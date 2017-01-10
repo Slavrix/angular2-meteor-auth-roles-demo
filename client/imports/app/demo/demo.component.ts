@@ -46,7 +46,7 @@ export class DemoComponent extends MeteorComponent implements OnInit, OnDestroy 
 
         Meteor.call("getRoles", Meteor.userId(), (error, data) => {
           if (!error) {
-            this.roles = JSON.parse(data);
+            this.roles = data;
             console.log("roles", this.roles);
           } else {
             console.log("error: ", error);

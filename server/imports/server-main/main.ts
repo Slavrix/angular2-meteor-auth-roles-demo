@@ -71,11 +71,14 @@ export class Main {
   }
 
   getRoles(id) {
-    console.log(roles);
+    // console.log(roles);
     if (Roles.userIsInRole(id, "admin")) {
-      return JSON.stringify(roles);
-    } else {
-      return JSON.stringify("blah");
+      return Roles.getAllRoles().map( (data) => {
+        // console.log(data);
+        return data.name;
+      });
+      // console.log(temp);
+      // return JSON.stringify(roles);
     }
   }
 }
