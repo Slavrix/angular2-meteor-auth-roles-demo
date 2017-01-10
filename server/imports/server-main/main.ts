@@ -4,18 +4,31 @@ export class Main {
   start(): void {
     Accounts.onCreateUser((options, user) => {
       console.log("new user");
-      console.log(user);
-      console.log(options);
 
-      user.profile = options.profile;
+      user.profile = options.profile || {name: ""};
       user.roles = options.roles || ["spectator"];
       console.log(user);
-      
+
       Roles.addUsersToRoles(user._id, user.roles, Roles.GLOBAL_GROUP);
 
       return user;
     });
 
+    Meteor.publish("usersList", (id) => {
+      if (Roles.userIsInRole(id, "admin")) {
+        return Meteor.users.find({}, {fields: {emails: 1, profile: 1, roles: 1}});
+      } else {
+        return Meteor.users.find(id);
+      }
+    });
+
+    let roles = ["admin", "spectator", "coach", "player"];
+    Roles.getAllRoles().map((data) => {
+      roles.splice(roles.indexOf(data.name), 1);
+    });
+    roles.map((data) => {
+      Roles.createRole(data);
+    });
     this.createAdmin();
   }
 

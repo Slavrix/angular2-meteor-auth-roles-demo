@@ -6,8 +6,8 @@
 <div *ngIf="user">
   <div>My Roles: {{getRoles()}}</div>
   <div *ngIf="user.profile">Your name is {{user.profile.name}}</div>
-  
-  <div *ngIf="!user.profile">
+
+  <div *ngIf="user.profile.name==''">
     <!--if no profile, allow user to save their name--> 
     <form class="form-inline" (ngSubmit)="updateProfile()" #nameForm="ngForm">
       <div class="form-group">
@@ -22,7 +22,12 @@
   </div>
     
   <div *ngIf="checkRoles('admin')">
-    
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let aUser of userList">
+      {{aUser.profile.name}}
+    </li>
+  </ul>
+
     <!--list all users with roles-->    
   </div>
 </div>

@@ -7,16 +7,16 @@
 declare module "meteor/alanning:roles" {
   export module Roles {
     const GLOBAL_GROUP;
-    function userIsInRole(id?: any, value?: any, value2?: any) {};
-    function addUsersToRoles(id?: any, value?: any, value2?: any) {};
-    function createRole(id?: any) {};
-    function deleteRole(id?: any) {};
-    function getAllRoles() {};
-    function getGroupsForUser(id?: any, value?: any) {};
-    function getRolesForUser(id?: any, value?: any) {};
-    function getUsersInRole (id?: any, value?: any, value2?: any){};
-    function removeUsersFromRoles (id?: any, value?: any, value2?: any){};
-    function setUsersRoles (id?: any, value?: any, value2?: any){};
+    function userIsInRole(id?: any, value?: any, value2?: any): any {};
+    function addUsersToRoles(id?: any, value?: any, value2?: any): any {};
+    function createRole(id?: any): any {};
+    function deleteRole(id?: any): any {};
+    function getAllRoles(): any {};
+    function getGroupsForUser(id?: any, value?: any): any {};
+    function getRolesForUser(id?: any, value?: any): any {};
+    function getUsersInRole (id?: any, value?: any, value2?: any): any {};
+    function removeUsersFromRoles (id?: any, value?: any, value2?: any): any {};
+    function setUsersRoles (id?: any, value?: any, value2?: any): any {};
   }
 }
 
