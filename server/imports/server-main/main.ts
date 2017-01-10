@@ -1,6 +1,9 @@
 import { Roles } from "meteor/alanning:roles";
 
+let roles = ["admin", "spectator", "coach", "player"]; // should move to both??
+
 export class Main {
+
   start(): void {
     Accounts.onCreateUser((options, user) => {
       console.log("new user");
@@ -23,14 +26,15 @@ export class Main {
     });
 
     Meteor.methods({
-      createNewUser: this.createNewUser
+      createNewUser: this.createNewUser,
+      getRoles: this.getRoles
     });
 
-    let roles = ["admin", "spectator", "coach", "player"];
+    let tempRoles = roles.slice(0);
     Roles.getAllRoles().map((data) => {
-      roles.splice(roles.indexOf(data.name), 1);
+      tempRoles.splice(tempRoles.indexOf(data.name), 1);
     });
-    roles.map((data) => {
+    tempRoles.map((data) => {
       Roles.createRole(data);
     });
     this.createAdmin();
@@ -66,4 +70,12 @@ export class Main {
     Accounts.createUser(account, callback);
   }
 
+  getRoles(id) {
+    console.log(roles);
+    if (Roles.userIsInRole(id, "admin")) {
+      return JSON.stringify(roles);
+    } else {
+      return JSON.stringify("blah");
+    }
+  }
 }

@@ -20,7 +20,8 @@ export class DemoComponent extends MeteorComponent implements OnInit, OnDestroy 
   greeting: string;
   //  data: Observable<Demo[]>;
   user: Meteor.User;
-  userList: any;
+  userList: any = [];
+  roles: any = [];
   // userListSub: Subscription;
   nameOfUser: string;
   newUser: any = {
@@ -39,13 +40,23 @@ export class DemoComponent extends MeteorComponent implements OnInit, OnDestroy 
   ngOnInit() {
     MeteorObservable.autorun().subscribe(() => {
       if (Meteor.userId()) {
-        console.log("we logged in");
+        // console.log("we logged in");
         Meteor.subscribe("usersList", Meteor.userId());
         this.userList = Meteor.users.find().fetch();
-        console.log(this.userList);
+
+        Meteor.call("getRoles", Meteor.userId(), (error, data) => {
+          if (!error) {
+            this.roles = JSON.parse(data);
+            console.log("roles", this.roles);
+          } else {
+            console.log("error: ", error);
+          }
+        });
+        console.log("user list", this.userList);
       } else {
         this.userList = [];
-        console.log("we logged out");
+        this.roles = [];
+        // console.log("we logged out");
       }
     });
   }
@@ -67,7 +78,7 @@ export class DemoComponent extends MeteorComponent implements OnInit, OnDestroy 
         }
       }
     }, (data) => {
-      console.log(data);
+      console.log("update profile: ", data);
     });
   }
 
@@ -91,5 +102,6 @@ export class DemoComponent extends MeteorComponent implements OnInit, OnDestroy 
 
   ngOnDestroy() {
     this.userList = [];
+    this.roles = [];
   }
 }
