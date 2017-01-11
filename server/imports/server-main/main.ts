@@ -27,6 +27,7 @@ export class Main {
 
     Meteor.methods({
       createNewUser: this.createNewUser,
+      updateUser: this.updateUser,
       getRoles: this.getRoles
     });
 
@@ -65,9 +66,21 @@ export class Main {
       },
       password: "123456",
       email: newUser.email,
-      roles: newUser.role
+      roles: [newUser.role]
     };
     Accounts.createUser(account, callback);
+  }
+
+  updateUser(user, callback): any {
+    Meteor.users.update(user._id, {
+      $set: {
+        "profile.name": user.profile.name,
+        "emails.0.address": user.emails[0].address
+      }
+    }, (data) => {
+      Roles.setUserRoles(user._id, user.roles);
+      callback;
+    });
   }
 
   getRoles(id) {

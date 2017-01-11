@@ -16,7 +16,7 @@ declare module "meteor/alanning:roles" {
     function getRolesForUser(id?: any, value?: any): any {};
     function getUsersInRole (id?: any, value?: any, value2?: any): any {};
     function removeUsersFromRoles (id?: any, value?: any, value2?: any): any {};
-    function setUsersRoles (id?: any, value?: any, value2?: any): any {};
+    function setUserRoles (id?: any, value?: any, value2?: any): any {};
   }
 }
 

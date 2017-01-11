@@ -29,6 +29,7 @@ export class DemoComponent extends MeteorComponent implements OnInit, OnDestroy 
     email: "",
     role: ""
   };
+  selectedUser = null;
 
   constructor(
     //  private demoDataService: DemoDataService
@@ -95,13 +96,31 @@ export class DemoComponent extends MeteorComponent implements OnInit, OnDestroy 
     });
   }
 
-  updateUser() {
+  updateUser(user, form, e) {
     // update a current user, only admin can do this
     // can change the name and the role
+    this.stopPropegation(e);
+    Meteor.call("updateUser", user, () => {
+      this.selectedUser = null;
+      form.reset();
+    });
   }
 
   ngOnDestroy() {
     this.userList = [];
     this.roles = [];
+  }
+
+  selectUsertoUpdate(ind) {
+    if (this.selectedUser === ind) {
+      this.selectedUser = null;
+    } else {
+      this.selectedUser = ind;
+    }
+  }
+
+  stopPropegation(e: Event) {
+    e.stopPropagation();
+    e.preventDefault();
   }
 }
